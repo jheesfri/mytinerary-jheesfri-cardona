@@ -4,6 +4,7 @@ import StandarLayout from "./Layouts/StandarLayout"
 import Home from "./Pages/Home"
 import Cities from "./Pages/Cities"
 import NoFound from "./Pages/NoFound"
+import CityDetail from "./Pages/CityDetail"
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,7 @@ const router = createBrowserRouter([
       { path: "/", element: <Home></Home> },
       { path: "/Home", element: <Home></Home> },
       { path: "/Cities", element: <Cities></Cities> },
+      { path: "/CityDetail/:id", element: <CityDetail></CityDetail> },
       { path: "/NoFound", element: <NoFound></NoFound> },
 
     ]

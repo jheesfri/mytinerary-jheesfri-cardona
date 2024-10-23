@@ -66,7 +66,7 @@ export default function Header() {
           <NavLink to="/">
             <img
               className="w-60 h-20 object-cover"
-              src="public/png-transparent-airplane-icon-a5-computer-icons-flight-airplane-angle-hand-monochrome-thumbnail-removebg-preview-removebg-preview.png"
+              src="png-transparent-airplane-icon-a5-computer-icons-flight-airplane-angle-hand-monochrome-thumbnail-removebg-preview-removebg-preview.png"
               alt="logo" />
           </NavLink>
 
@@ -74,7 +74,7 @@ export default function Header() {
         <div
           className="flex justify-end items-center">
           <h5>User Name</h5>
-          <img src="public/png-transparent-samsung-galaxy-a8-a8-user-login-telephone-avatar-pawn-blue-angle-sphere.png" alt="User"
+          <img src="png-transparent-samsung-galaxy-a8-a8-user-login-telephone-avatar-pawn-blue-angle-sphere.png" alt="User"
             className="w-24" />
         </div>
       </div>

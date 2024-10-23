@@ -22,6 +22,7 @@ export default function Home() {
     const groupedCities = [];
     for (let i = 0; i < cities.length; i += 4) {
         groupedCities.push(cities.slice(i, i + 4));
+        //funcion para poner de a 4 ciudades en cada carrusel 
     }
     return (
         <div>
