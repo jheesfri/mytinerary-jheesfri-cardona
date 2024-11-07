@@ -4,7 +4,8 @@ import { FaHome, FaCity, FaBusAlt, FaBars } from "react-icons/fa";
 import { IoTicketSharp, IoCarSharp } from "react-icons/io5";
 import { FaHotel } from "react-icons/fa6";
 import { CiBookmarkCheck } from "react-icons/ci";
-
+import logo from '../../public/png-transparent-airplane-icon-a5-computer-icons-flight-airplane-angle-hand-monochrome-thumbnail-removebg-preview-removebg-preview.png'
+import userNotLogin from '../../public/png-transparent-samsung-galaxy-a8-a8-user-login-telephone-avatar-pawn-blue-angle-sphere.png'
 const routes = [
   { to: "/", text: "Home", icon: <FaHome className="ml-3 mt-1"></FaHome> },
   { to: "/Cities", text: "Cities", icon: <FaCity className="ml-3 mt-1"></FaCity> },
@@ -50,7 +51,7 @@ export default function Header() {
                 <div
                   className="flex justify-evenly items-center pb-4">
                   <p  className="text-sm mt-2">User Name</p>
-                  <img src="public/png-transparent-samsung-galaxy-a8-a8-user-login-telephone-avatar-pawn-blue-angle-sphere.png" alt="User"
+                  <img src={userNotLogin}  alt="User"
                     className="w-20" />
                 </div>
               </div></>
@@ -66,7 +67,7 @@ export default function Header() {
           <NavLink to="/">
             <img
               className="w-60 h-20 object-cover"
-              src="png-transparent-airplane-icon-a5-computer-icons-flight-airplane-angle-hand-monochrome-thumbnail-removebg-preview-removebg-preview.png"
+              src={logo}
               alt="logo" />
           </NavLink>
 
@@ -74,7 +75,7 @@ export default function Header() {
         <div
           className="flex justify-end items-center">
           <h5>User Name</h5>
-          <img src="png-transparent-samsung-galaxy-a8-a8-user-login-telephone-avatar-pawn-blue-angle-sphere.png" alt="User"
+          <img src={userNotLogin} alt="User"
             className="w-24" />
         </div>
       </div>

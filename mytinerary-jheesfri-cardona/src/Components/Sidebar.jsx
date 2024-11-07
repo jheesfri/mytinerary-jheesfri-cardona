@@ -4,6 +4,7 @@ import { FaHome,FaCity,FaBusAlt } from "react-icons/fa";
 import { IoTicketSharp,IoCarSharp } from "react-icons/io5";
 import { FaHotel } from "react-icons/fa6";
 import { CiBookmarkCheck } from "react-icons/ci";
+import userNotLogin from '../../public/png-transparent-samsung-galaxy-a8-a8-user-login-telephone-avatar-pawn-blue-angle-sphere.png'
 
 
 const routes = [
@@ -41,7 +42,7 @@ export default function Sidebar() {
         className="flex justify-evenly items-end h-full pb-2">
         <p
         className="text-sm mt-4">User Name</p>
-        <img src="public/png-transparent-samsung-galaxy-a8-a8-user-login-telephone-avatar-pawn-blue-angle-sphere.png" alt="User"
+        <img src={userNotLogin} alt="User"
             className="w-20" />
       </div>
     </div>

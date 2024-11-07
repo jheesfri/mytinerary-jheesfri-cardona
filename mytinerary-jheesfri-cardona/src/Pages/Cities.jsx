@@ -2,13 +2,17 @@ import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa'
 import { FaPlaneUp } from "react-icons/fa6"
+import { useDispatch, useSelector } from "react-redux"
+import { setCities, setSearch } from "../store/actions/citiesAction"
+
 
 
 export default function Cities() {
-    const [cities, setCities] = useState([])
-    const [search, setSearch] = useState('')
-    const [message,setMessage] = useState('')
-    console.log(cities);
+    const [message, setMessage] = useState('')
+
+    const dispatch = useDispatch()
+    const cities = useSelector((state) => state.cities.cities)
+    const search = useSelector((state) => state.cities.search)
 
     const navigate = useNavigate()
 
@@ -27,13 +31,12 @@ export default function Cities() {
                 console.log(data.response)
                 if (data.message) {
                     setMessage(data.message)
-                    setCities([])
+                  dispatch(setCities([]))
                 } else {
-                    setCities(data.response)
+                    dispatch (setCities(data.response))
                     setMessage('')
                 }
 
-                setCities(data.response) // actualizo el estado de Ciudades
             } catch (error) {
                 console.error('error fetching cities: ', error) // error si el fetch no es exitoso
 
@@ -55,20 +58,15 @@ export default function Cities() {
     }
 
     return (
-        <div
-            className="h-auto flex flex-col items-center my-3">
-            <h1
-                className="text-3xl m-3">you find the best deals in your favorite city</h1>
-
+        <div className="h-auto flex flex-col items-center my-3">
+            <h1 className="text-3xl m-3">you find the best deals in your favorite city</h1>
             <div>
                 <div className="m-3 flex justify-center">
                     {/* barra de busquedad */}
                     <input
-                        type="text"
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        placeholder="Search"
-                        className="w-11/12 p-2 rounded-lg bg-white bg-opacity-70 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    type="text" 
+                    value={search} 
+                    onChange={(e) => dispatch(setSearch(e.target.value))} placeholder="Search" className="w-11/12 p-2 rounded-lg bg-white bg-opacity-70 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
 
                 {cities.length === 0 ?
@@ -78,9 +76,9 @@ export default function Cities() {
                     <div className="flex flex-wrap" >
                         {/* contenedor ciudades */}
                         {cities.map((city, index) => (
-                            <button 
-                            key={index}
-                            onClick={()=>detailCity(city.id)}>
+                            <button
+                                key={index}
+                                onClick={() => detailCity(city.id)}>
                                 <div className="w-32h-32 m-3  bg-black bg-opacity-95 shadow-md rounded-xl overflow-hidden">
                                     <div className="rounded-xl">
                                         <img className="w-60 h-52 object-cover rounded-xl" src={city.image} alt={city.name} />
