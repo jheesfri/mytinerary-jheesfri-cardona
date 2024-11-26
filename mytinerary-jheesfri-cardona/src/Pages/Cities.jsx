@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom"
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa'
 import { FaPlaneUp } from "react-icons/fa6"
 import { useDispatch, useSelector } from "react-redux"
-import { setCities, setSearch } from "../store/actions/citiesAction"
+import { getCities, setSearch } from "../store/actions/citiesAction"
 
 
 
 export default function Cities() {
     const [message, setMessage] = useState('')
-
+    const [error, setError] = useState('')
     const dispatch = useDispatch()
     const cities = useSelector((state) => state.cities.cities)
     const search = useSelector((state) => state.cities.search)
@@ -17,33 +17,11 @@ export default function Cities() {
     const navigate = useNavigate()
 
     useEffect(() => {
+  
 
-        const fetchCities = async () => {
-
-            try {
-                const response = await fetch(`http://localhost:8080/mytinerary/cities/search?name=${search}`)
-
-                if (!response.ok) { // si el servidor no responde se muestra error
-                    throw new error('Network error')
-                }
-
-                const data = await response.json() // convierto respuesta en formato json() 
-                console.log(data.response)
-                if (data.message) {
-                    setMessage(data.message)
-                  dispatch(setCities([]))
-                } else {
-                    dispatch (setCities(data.response))
-                    setMessage('')
-                }
-
-            } catch (error) {
-                console.error('error fetching cities: ', error) // error si el fetch no es exitoso
-
-            }
-
-        }
-        fetchCities() // ejecuto la funcion eso hace que cada que la dependencia cambie se ejecute d enuevo el fetch
+          console.log('se ejecuto useEffect');
+          dispatch(getCities(search))
+       
     }, [search]) // dependencia 
 
 
@@ -64,9 +42,9 @@ export default function Cities() {
                 <div className="m-3 flex justify-center">
                     {/* barra de busquedad */}
                     <input
-                    type="text" 
-                    value={search} 
-                    onChange={(e) => dispatch(setSearch(e.target.value))} placeholder="Search" className="w-11/12 p-2 rounded-lg bg-white bg-opacity-70 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        type="text"
+                        value={search}
+                        onChange={(e) => dispatch(setSearch(e.target.value))} placeholder="Search" className="w-11/12 p-2 rounded-lg bg-white bg-opacity-70 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
 
                 {cities.length === 0 ?
@@ -93,6 +71,7 @@ export default function Cities() {
 
 
                     </div>}
+                    {error && <div className="text-red-500">{error}</div>}
             </div>
 
             <div

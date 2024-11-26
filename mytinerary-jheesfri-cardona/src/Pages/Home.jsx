@@ -3,41 +3,18 @@ import CallToAction from "../Components/CallToAction";
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { useSelector, useDispatch } from "react-redux";
-import { setCities } from "../store/actions/citiesAction";
+import axios from "axios";
 
 export default function Home() {
-
-    const cities = useSelector((state) => state.cities.cities)
+    const token = localStorage.getItem('token')
+    const {cities, loading, error} = useSelector((state) => state.cities)
     console.log(cities);
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        const fetchCities = async () => {
+   if(loading){
+    return <h1>Loading...</h1>}
 
-            try {
-                const response = await fetch('http://localhost:8080/mytinerary/cities/all')
-
-                if (!response.ok) { // si el servidor no responde se muestra error
-                    throw new error('Network error')
-                }
-
-                const data = await response.json() // convierto respuesta en formato json() 
-                console.log(data.response)
-                if (data.message) {
-                    dispatch(setCities([]))
-                } else {
-                    dispatch(setCities(data.response))
-                }
-
-            } catch (error) {
-                console.error("Fetch error:", error);
-            }
-        }
-        fetchCities()
-    }, [])
-   
-
-    const groupedCities = []
+    const groupedCities = [] 
 
     for (let i = 0; i < cities.length; i += 4) {
         groupedCities.push(cities.slice(i, i + 4));

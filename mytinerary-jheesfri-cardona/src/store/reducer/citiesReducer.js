@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { setActivities, setCities, setCitySeleted, setItineraries, setSearch } from '../actions/citiesAction.js'
+import { setActivities, setCitySeleted, setItineraries, setSearch, getCities } from '../actions/citiesAction.js'
 
 
 //estado inical 
@@ -8,14 +8,14 @@ const initialState = {
     citySelect: [null],
     itineraries:[],
     search: "",
-    activities: []
+    activities: [],
+    loading: true,
+    error: false
 }
 
 const citiesReducer = createReducer(initialState, (builder) => {
     builder
-        .addCase(setCities, (state, action) => {
-            state.cities = action.payload;
-        })
+      
         .addCase(setCitySeleted, (state, action) => {
             state.citySelect = action.payload;
         })
@@ -27,7 +27,24 @@ const citiesReducer = createReducer(initialState, (builder) => {
         })
         .addCase(setActivities, (state, action) => {
             state.search = action.payload;
+        }).
+        addCase(getCities.pending, (state, action) => {
+            console.log('estado pendiente');
+            
+            state.loading = true
+        }).
+        addCase(getCities.fulfilled, (state, action) => {
+            console.log('estado exitoso');
+            
+            state.loading = false
+            state.cities = action.payload
+        }).
+        addCase(getCities.rejected, (state) => {
+            console.log('error');
+            
+            state.loading = false
+            state.error = true
         })
-});
+})
 
 export default citiesReducer

@@ -23,7 +23,11 @@ const CityDetail = () => {
         const fetchCity = async () => {
 
             try {
-                const response = await fetch(`http://localhost:8080/mytinerary/cities/search?id=${id}`)
+                const response = await fetch(`http://localhost:8080/mytinerary/cities/search?id=${id}`,{
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`, // Incluyendo el token
+                    },
+                })
 
                 const data = await response.json() // convierto respuesta en formato json() 
                 console.log(data.response)
